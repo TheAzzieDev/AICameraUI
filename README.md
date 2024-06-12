@@ -1,2 +1,2 @@
 # AICameraUI
-A test for how the how the UI can look for the security camera
+A test for how the UI can look for the security camera
