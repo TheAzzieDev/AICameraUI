@@ -3,33 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".MainActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
-
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        >
         <!-- Sticky Header -->
-        <TextView
-            android:id="@+id/stickyHeader"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
-            android:fontFamily="@font/lato_bold"
-            android:textStyle="bold"
-            android:padding="16dp"
-            android:text="Sticky Header"
-            android:background="#FFFFFF"
-            android:elevation="4dp" />
 
         <!-- Scrollable Content -->
+
+        <TextView
+            android:id="@+id/stickyHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text=""
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            />
+
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="40dp"
+            android:paddingTop="10dp"
             android:fillViewport="true">
 
             <LinearLayout
@@ -41,57 +48,161 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/header1"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center_vertical"
-                    android:textSize="20sp"
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:text="Header 1"
-                    android:padding="16dp" />
-
-                <!-- Add your content here -->
-
-                <TextView
-                    android:id="@+id/header2"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
                     android:gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:text="Header 2"
-                    android:padding="16dp" />
-
-                <!-- Add more content here -->
-
-                <TextView
-                    android:id="@+id/header5"
+                    android:text="2024-05-07"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:text="Header 3"
-                    android:padding="16dp" />
-                <TextView
-                    android:id="@+id/header6"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/divider"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:divider="@drawable/divider"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:text="Header 3"
-                    android:padding="16dp" />
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/divider"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
 
-            <!-- Add more sections as needed -->
 
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:divider="@drawable/divider"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/divider"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
+                    <ImageView
+                        android:id="@+id/imageView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:divider="@drawable/divider"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                    <ImageView
+                        android:id="@+id/imageView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/divider"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
+                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:divider="@drawable/divider"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+                    <ImageView
+                        android:id="@+id/imageView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/anime_girl" />
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
-    </FrameLayout>
+
+
+    </LinearLayout>
+
+
 
 
 
