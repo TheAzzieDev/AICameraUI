@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <!-- Sticky Header -->
+        <TextView
+            android:id="@+id/stickyHeader"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:text="Sticky Header"
+            android:background="#FFFFFF"
+            android:elevation="4dp" />
+
+        <!-- Scrollable Content -->
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="40dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider"
+                android:showDividers="middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/header1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:text="Header 1"
+                    android:padding="16dp" />
+
+                <!-- Add your content here -->
+
+                <TextView
+                    android:id="@+id/header2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:text="Header 2"
+                    android:padding="16dp" />
+
+                <!-- Add more content here -->
+
+                <TextView
+                    android:id="@+id/header5"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:text="Header 3"
+                    android:padding="16dp" />
+                <TextView
+                    android:id="@+id/header6"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:text="Header 3"
+                    android:padding="16dp" />
+
+            <!-- Add more sections as needed -->
+
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
