@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
     }
 
-
     public void showText(View view) {
         int id = view.getId();
         Button myButton = findViewById(R.id.stream_button);

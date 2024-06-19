@@ -6,6 +6,7 @@
     tools:context=".MainActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
+        android:id="@+id/topLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -57,6 +58,7 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
                 <LinearLayout
+                    android:id="@+id/imageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:divider="@drawable/divider"
