@@ -36,25 +36,7 @@ public class GalleryActivity extends AppCompatActivity {
         View scrollView = findViewById(R.id.scrollView);
         LinearLayout lin = findViewById(R.id.linearLayout);
         Log.d("drawable_test3", Integer.toString(((ViewGroup) lin).getChildCount()));
-
-        for(int i = 0; i < ((ViewGroup) lin).getChildCount(); i++) {
-            if(lin.getChildAt(i) instanceof LinearLayout){
-                LinearLayout child = (LinearLayout) lin.getChildAt(i);
-                for(int j = 0; j < ((ViewGroup) child).getChildCount(); j++) {
-                    final int index = j;
-                    Log.d("drawable_test", "Im runnning");
-                    if(child.getChildAt(j) instanceof ImageView) {
-                        View image = child.getChildAt(j);
-                        image.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                child.removeView(image);
-                            }
-                        });
-                    }
-                }
-            }
-        }
+        
 
         scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
@@ -86,6 +68,9 @@ public class GalleryActivity extends AppCompatActivity {
       ViewGroup
       .removeView(View view)
       .removeViewAt(int index)
+
+       måste testa runt med funktionen nedan
+      .getLocationOnScreen(location);
 
      */
     private void handleStickyHeader() {
@@ -128,12 +113,12 @@ public class GalleryActivity extends AppCompatActivity {
             LinearLayout gallerLin = findViewById(R.id.imageLayout);
             ImageView image = (ImageView) gallerLin.getChildAt(0);
             Drawable d = image.getDrawable();
+
             Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.anime_sky, null);
             image.setImageDrawable(drawable);
 
             ImageView image2 = (ImageView) gallerLin.getChildAt(2);
             //getResources().getResourceEntryName(R.drawable.anime_sky);
-            //Log.d("drawable_test", getResources().getResourceEntryName(R.drawable.anime_sky));
 
             //context är egentligen bara ett sätt att komma åt olika klasser in android systemet
             //det finns this - aktiviteten, getApplicationContext(), .getContext() - från en view kan exempelvis vara textView

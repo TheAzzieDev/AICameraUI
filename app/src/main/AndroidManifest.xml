@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".SecondActivity" />
         <activity android:name=".GalleryActivity" />
+        <activity android:name=".LearningActivity" />
     </application>
 
 </manifest>

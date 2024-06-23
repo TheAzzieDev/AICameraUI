@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         Button button = findViewById(R.id.stream_button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,9 +36,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
     public void toggleOptions(View view) {
         Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, LearningActivity.class);
+        startActivity(intent);
     }
 
     public void showText(View view) {
