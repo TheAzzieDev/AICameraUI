@@ -20,16 +20,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @NonNull
     @Override
-    //håller själva xml layouten
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_view, parent, false));
     }
-    //Det är på onBindViewHolder som an
+    //Det är på onBindViewHolder all content sätts med ett värde
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.name.setText(items.get(position).getName());
-        holder.email.setText(items.get(position).getEmail());
         holder.imageView.setImageResource(items.get(position).getImage());
+
     }
 
     @Override

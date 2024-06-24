@@ -4,6 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main">#FFC5808A</color>
     <color name="secondary">#B6747E</color>
+    <color name="solidGreen">#088A82</color>
+    <color name="danger">#BF239D</color>
     <color name="transparent_black">#97000000</color>
 
 </resources>

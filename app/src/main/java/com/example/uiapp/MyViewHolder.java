@@ -13,7 +13,5 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.imageView);
-        name = itemView.findViewById(R.id.name);
-        email = itemView.findViewById(R.id.email);
     }
 }
