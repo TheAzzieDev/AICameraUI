@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.configure_button:
                 Toast.makeText(this, "hool", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, CalendarTest.class);
+                startActivity(intent);
                 break;
         }
     }

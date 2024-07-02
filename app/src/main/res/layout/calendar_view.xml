@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:id="@+id/calenderLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LearningActivity"
+    >
 
     <LinearLayout
         android:id="@+id/linearHeader"
@@ -17,7 +20,7 @@
         >
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/close_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -33,8 +36,8 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                >
                 <ImageView
                     android:id="@+id/arrow_down"
                     android:layout_width="wrap_content"
@@ -48,7 +51,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/monthYearTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -74,13 +77,16 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:rotation="180"
+                android:onClick="previousMonthAction"
                 app:srcCompat="@drawable/calendar_arrow" />
             <ImageView
                 android:id="@+id/arrow_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/calendar_arrow" />
+                app:srcCompat="@drawable/calendar_arrow"
+                android:onClick="nextMonthAction" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -181,9 +187,12 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"
+        android:onClick="nextMonthAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView"
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
