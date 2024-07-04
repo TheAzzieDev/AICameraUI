@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/calendar_background"
     android:id="@+id/calenderLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LearningActivity"
@@ -13,12 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintTop_toTopOf="parent"
         >
-
         <ImageView
             android:id="@+id/close_calendar"
             android:layout_width="wrap_content"
@@ -26,17 +26,16 @@
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/cross" />
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             >
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 >
                 <ImageView
                     android:id="@+id/arrow_down"
@@ -47,7 +46,6 @@
                     android:rotation="90"
                     app:srcCompat="@drawable/calendar_arrow"
                     app:tint="#BF239D"
-
                     />
 
                 <TextView
@@ -56,7 +54,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:text="June"
+                    android:onClick="openMonthSelection"
+                    android:text="Sep 2024"
                     android:textAlignment="center"
                     android:textColor="@color/danger"
                     android:textSize="25dp" />
@@ -95,11 +94,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearHeader"
-     >
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearHeader">
 
         <TextView
             android:id="@+id/Mo"
@@ -108,73 +107,75 @@
             android:layout_weight="1"
             android:text="Mo"
             android:textAlignment="center"
-            android:textColor="@color/solidGreen"
-            />
+            android:textColor="@color/solidGreen" />
+
         <TextView
             android:id="@+id/Tu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="Tu"
-            android:textColor="@color/solidGreen"
-            />
+            android:textAlignment="center"
+            android:textColor="@color/solidGreen" />
+
         <TextView
             android:id="@+id/We"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="We"
-            android:textColor="@color/solidGreen"
-            />
+            android:textAlignment="center"
+            android:textColor="@color/solidGreen" />
+
         <TextView
             android:id="@+id/Th"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="Th"
-            android:textColor="@color/solidGreen"
-            />
+            android:textAlignment="center"
+            android:textColor="@color/solidGreen" />
+
         <TextView
             android:id="@+id/Fr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="Fr"
-            android:textColor="@color/solidGreen"
-            />
+            android:textAlignment="center"
+            android:textColor="@color/solidGreen" />
+
         <TextView
             android:id="@+id/Sa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="Sa"
-            android:textColor="@color/solidGreen"
-            />
+            android:textAlignment="center"
+            android:textColor="@color/solidGreen" />
+
         <TextView
             android:id="@+id/Su"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="Su"
-            android:textColor="@color/solidGreen"
-            />
+            android:textAlignment="center"
+            android:textColor="@color/solidGreen" />
     </LinearLayout>
+    <!-- Calendar RecyclerView
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+    -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearDays"
-   />
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearDays" />
 
     <Button
         android:id="@+id/stream_button"
@@ -186,12 +187,17 @@
         android:text="See Date"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="40dp"
         android:onClick="nextMonthAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView"
-
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/stream_button"
         />
 
 

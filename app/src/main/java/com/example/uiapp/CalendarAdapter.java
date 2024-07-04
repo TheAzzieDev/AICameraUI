@@ -19,11 +19,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     private final OnItemListener onItemListener;
     private Context context;
     int selectMonth;
-    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener, Context contextInput, int month) {
+    int year;
+    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener, Context contextInput, int month, int year) {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
         this.context = contextInput;
         this.selectMonth = month;
+        this.year = year;
     }
 
     @NonNull
@@ -40,11 +42,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         Log.d("debug_cal", "before");
         holder.dayOfMonth.setText(daysOfMonth.get(position));
-        //vid problem med jämnförelser kolla alltid vilken typ so
 
+        //vid problem med jämnförelser kolla alltid vilken typ so
         if(!daysOfMonth.get(position).isEmpty()){
             if(Integer.parseInt(daysOfMonth.get(position)) == (LocalDate.now()).getDayOfMonth()
-            && selectMonth == (LocalDate.now()).getMonthValue()) {
+                    && selectMonth == (LocalDate.now()).getMonthValue() && year == (LocalDate.now()).getYear()) {
                 //holder.dayOfMonth.setBackgroundColor(ContextCompat.getColor(context, R.color.solidGreen));
                 holder.dayOfMonth.setBackground(ContextCompat.getDrawable(context, R.drawable.calendar_button));
                 holder.dayOfMonth.setPadding(45, 30, 45, 30);

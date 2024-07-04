@@ -46,7 +46,7 @@ public class CalendarTest extends AppCompatActivity implements CalendarAdapter.O
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, this, selectedDate.getMonthValue());
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, this, selectedDate.getMonthValue(), selectedDate.getYear());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
