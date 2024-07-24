@@ -66,76 +66,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stream_button" />
 
-    <View
-        android:id="@+id/view"
+    <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@drawable/nav_container"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/button4"
-                android:contentDescription="something"
-                android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomAppBar"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_marginBottom="20dp"
+        app:fabCradleMargin="0dp"
+        app:fabCradleRoundedCornerRadius="0dp"
+        app:elevation="0dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/mobile_custom"
+            android:layout_marginEnd="15dp"
+            android:orientation="horizontal"
+            >
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/nav_item"
-                android:src="@drawable/eye"
-                android:scaleType="centerInside"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/button5"
-                android:layout_width="100dp"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/gallery"
+                    android:layout_width="50dp"
+                    android:contentDescription="something"
+                    android:layout_height="50dp"
+                    android:background="@drawable/gallery"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:onClick="navClick"
+                    />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/nav_item"
-                android:contentDescription="something"
-                android:src="@drawable/settingsnav"
-                android:layout_gravity="center"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="true"
-                android:onClick="toggleOptions"
-                />
-        </FrameLayout>
+                android:layout_weight="1">
 
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/gallery"
-                android:layout_width="100dp"
-                android:contentDescription="something"
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/nav_item"
-                android:onClick="changeToGallery"
-                android:src="@drawable/gallery"
-                android:layout_gravity="center"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="true" />
-        </FrameLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/settings"
+                    android:layout_width="50dp"
+                    android:contentDescription="something"
+                    android:layout_height="50dp"
+                    android:background="@drawable/settings"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:onClick="navClick"
+                    />
+            </FrameLayout>
 
 
-    </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/eye"
+        android:onClick="navClick"
+        app:tint="@color/solidGreen"
+        app:layout_anchor="@id/bottomAppBar"
+        app:maxImageSize="40dp"
+        app:fabCustomSize="70dp"
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

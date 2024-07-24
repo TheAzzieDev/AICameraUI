@@ -7,8 +7,14 @@
     <color name="solidGreen">#088A82</color>
     <color name="yearGreen">#BDECE9</color>
     <color name="lightGreen">#E4FFFD</color>
+    <color name="selectorGreen">#0A534E</color>
     <color name="danger">#BF239D</color>
     <color name="dangerSecondary">#AD3A55</color>
     <color name="transparent_black">#97000000</color>
+
+
+
+
+
 
 </resources>
