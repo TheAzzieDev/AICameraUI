@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -18,74 +19,51 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
 
-public class GalleryActivity extends AppCompatActivity {
+public class GalleryActivity extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.gallery);
+    @Nullable
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.gallery, container, false);
         // Initialize the headers array with your header TextViews
-        View scrollView = findViewById(R.id.scrollView);
-        LinearLayout lin = findViewById(R.id.linearLayout);
+        View scrollView = view.findViewById(R.id.scrollView);
+        LinearLayout lin = view.findViewById(R.id.linearLayout);
         Log.d("drawable_test3", Integer.toString(((ViewGroup) lin).getChildCount()));
         
 
         scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
-                handleStickyHeader();
+                handleStickyHeader(view);
 
             }
         });
+        return inflater.inflate(R.layout.gallery, container, false);
     }
 
-    public void switchActivity(View view) {
-        Intent intent = new Intent(GalleryActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
-
-
-
-
-
-
-    /*
-
-     ( ((WidgetType) linearLayout)).getChildCount()         antal children i widget
-     ((ViewGroup) linearLayout).getChildAt(index);          child på index i widget
-      Widget.getId();                                      Id från child i widget ger int
-      .getTop()                                            .getTop() returnerar int av distans från toppen i förhållande till parent widget
-
-      ViewGroup
-      .removeView(View view)
-      .removeViewAt(int index)
-
-       måste testa runt med funktionen nedan
-      .getLocationOnScreen(location);
-
-     */
-    private void handleStickyHeader() {
-        TextView stickyHeader = findViewById(R.id.stickyHeader);
-        View scrollView = findViewById(R.id.scrollView);
+    private void handleStickyHeader(View rootView) {
+        TextView stickyHeader = rootView.findViewById(R.id.stickyHeader);
+        View scrollView = rootView.findViewById(R.id.scrollView);
 
         int scrollY = scrollView.getScrollY();
-        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        LinearLayout linearLayout = rootView.findViewById(R.id.linearLayout);
         ArrayList<TextView> childViewData = new ArrayList<>();
 
         for (int i = 0; i < ((ViewGroup) linearLayout).getChildCount(); i++) {
             View child = ((ViewGroup) linearLayout).getChildAt(i);
             if(child instanceof TextView){
                 Object childId = child.getId();
-                childViewData.add(findViewById((int) childId));
+                childViewData.add(rootView.findViewById((int) childId));
             }
         }
         int count = 0;
@@ -98,7 +76,7 @@ public class GalleryActivity extends AppCompatActivity {
             int headerTop = location[1] - scrollView.getTop();
             //stickyHeader.setText(String.format(Integer.toString(location[1]-scrollView.getTop())));
             if (count == 0) firstDistance = headerTop;
-            LinearLayout lin = findViewById(R.id.topLinearLayout);
+            LinearLayout lin = rootView.findViewById(R.id.topLinearLayout);
             //String s = String.format(Locale.ENGLISH, "count: %d distance to Top: %d scrollview getTop: %d", count, headerTop, lin.getTop()) ;
             //Log.d("Distance", s);
 
@@ -110,7 +88,7 @@ public class GalleryActivity extends AppCompatActivity {
             Kolla upp basic fuinktioner för några widget om det går segt hitta en tutorial och följ den oldschool app med java exempelvis.
 
              */
-            LinearLayout gallerLin = findViewById(R.id.imageLayout);
+            LinearLayout gallerLin = rootView.findViewById(R.id.imageLayout);
             ImageView image = (ImageView) gallerLin.getChildAt(0);
             Drawable d = image.getDrawable();
 
@@ -126,7 +104,7 @@ public class GalleryActivity extends AppCompatActivity {
 
             Context tets = scrollView.getContext();
 
-            int color = ContextCompat.getColor(this, R.color.main);
+            int color = ContextCompat.getColor(getActivity().getApplicationContext(), R.color.main);
             stickyHeader.setTextColor(color);
 
             //Log.d("drawable_test", d.toString());

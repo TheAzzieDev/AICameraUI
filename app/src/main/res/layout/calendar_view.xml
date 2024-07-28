@@ -54,7 +54,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:onClick="openMonthSelection"
                     android:text="Sep 2024"
                     android:textAlignment="center"
                     android:textColor="@color/danger"

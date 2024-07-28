@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -18,10 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -38,7 +42,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class LearningActivity extends AppCompatActivity  implements CalendarAdapter.OnItemListener{
+public class LearningActivity extends Fragment implements CalendarAdapter.OnItemListener{
 
     //never use find view outside the methods if you are trying to make the variables global
     //it throws an error becuase the layout has not yet loaded
@@ -54,18 +58,13 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
     public Dialog monthDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.learning_layout);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.learning_layout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        recyclerView = findViewById(R.id.recyclerView);
-        adapter = new MyAdapter(getApplicationContext(), items);
+        View view = inflater.inflate(R.layout.learning_layout, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        adapter = new MyAdapter(view.getContext(), items);
 
         items.add(new Item(R.drawable.anime_girl, "2024-05-23"));
         items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
@@ -74,15 +73,22 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
         items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
         items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
         items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
+        /*
 
+         */
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+
+        ImageView calendar = view.findViewById(R.id.calendar);
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               showCalendar(view);
+            }
+        });
+        return view;
     }
 
-    public void goBack(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
     public void removeImage(View view) {
         List<Item> itemsToRemove = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
@@ -105,9 +111,8 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
         adapter.notifyDataSetChanged();
     }
 
-
     public void showCalendar(View view) {
-        dialog = new Dialog(this);
+        dialog = new Dialog(view.getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.calendar_view);
@@ -127,6 +132,13 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+        TextView monthYearTV = dialog.findViewById(R.id.monthYearTV);
+        monthYearTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMonthSelection(view);
             }
         });
 
@@ -197,7 +209,7 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
     public void onItemClick(int position, String dayText) {
         if(!dayText.isEmpty()){
             String message = "selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -219,7 +231,7 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
     */
     public void openMonthSelection(View view) {
         dialog.dismiss();
-        monthDialog = new Dialog(this);
+        monthDialog = new Dialog(view.getContext());
         monthDialog.setCancelable(true);
         monthDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         monthDialog.setContentView(R.layout.calendar_month);
@@ -229,8 +241,14 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
         }
         monthDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         monthDialog.show();
+        ImageView close = monthDialog.findViewById(R.id.close_calendar);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                monthDialog.dismiss();
+            }
+        });
         initWidget();
-
     }
 
     void initWidget(){
@@ -244,15 +262,15 @@ public class LearningActivity extends AppCompatActivity  implements CalendarAdap
             child.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    monthOnClick(text);
+                    monthOnClick(v, text);
                 }
             });
         }
     }
 
-    public void monthOnClick(String month) {
+    public void monthOnClick(View view, String month) {
         String text = "I am a message " + month;
-        Toast.makeText(monthDialog.getContext(), text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT).show();
         int monthIndex;
 
         switch (month) {
