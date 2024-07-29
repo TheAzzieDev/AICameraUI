@@ -75,15 +75,13 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:rotation="180"
-                android:onClick="previousMonthAction"
                 app:srcCompat="@drawable/calendar_arrow" />
             <ImageView
                 android:id="@+id/arrow_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/calendar_arrow"
-                android:onClick="nextMonthAction" />
+                app:srcCompat="@drawable/calendar_arrow" />
 
         </LinearLayout>
     </LinearLayout>

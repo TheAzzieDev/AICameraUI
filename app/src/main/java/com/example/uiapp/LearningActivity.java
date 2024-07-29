@@ -27,6 +27,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -42,7 +43,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class LearningActivity extends Fragment implements CalendarAdapter.OnItemListener{
+public class LearningActivity extends Fragment implements CalendarAdapter.OnItemListener, YearAdapter.OnItemListener{
 
     //never use find view outside the methods if you are trying to make the variables global
     //it throws an error becuase the layout has not yet loaded
@@ -54,25 +55,30 @@ public class LearningActivity extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     public Dialog dialog;
+    public ImageView arrowLeft;
+    public ImageView arrowRight;
 
     public Dialog monthDialog;
-
+    public Dialog yearDialog;
+    List<YearItem> yearItems;
+    View view;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = inflater.inflate(R.layout.learning_layout, container, false);
+        view = inflater.inflate(R.layout.learning_layout, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        Button removeButton = view.findViewById(R.id.removeButton);
         adapter = new MyAdapter(view.getContext(), items);
 
         items.add(new Item(R.drawable.anime_girl, "2024-05-23"));
-        items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
-        items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
-        items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
-        items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
-        items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
-        items.add(new Item(R.drawable.anime_sky, "2024-06-23"));
+        items.add(new Item(R.drawable.anime_sky, "2024-07-23"));
+        items.add(new Item(R.drawable.anime_sky, "2024-07-23"));
+        items.add(new Item(R.drawable.anime_sky, "2024-07-23"));
+        items.add(new Item(R.drawable.anime_sky, "2024-07-23"));
+        items.add(new Item(R.drawable.anime_sky, "2024-07-23"));
+        items.add(new Item(R.drawable.anime_sky, "2024-07-23"));
         /*
 
          */
@@ -84,6 +90,13 @@ public class LearningActivity extends Fragment implements CalendarAdapter.OnItem
             @Override
             public void onClick(View view) {
                showCalendar(view);
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeImage(view);
             }
         });
         return view;
@@ -127,6 +140,9 @@ public class LearningActivity extends Fragment implements CalendarAdapter.OnItem
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         View close = dialog.findViewById(R.id.close_calendar);
+        arrowLeft = dialog.findViewById(R.id.arrow_left);
+        arrowRight = dialog.findViewById(R.id.arrow_right);
+        arrowRight = dialog.findViewById(R.id.arrow_right);
 
         close.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -134,13 +150,34 @@ public class LearningActivity extends Fragment implements CalendarAdapter.OnItem
                 dialog.dismiss();
             }
         });
+
         TextView monthYearTV = dialog.findViewById(R.id.monthYearTV);
         monthYearTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openMonthSelection(view);
+                dialog.dismiss();
             }
         });
+
+        arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousMonthAction(view);
+            }
+        });
+
+        arrowRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextMonthAction(view);
+            }
+        });
+
+
+
+
+
 
         dialog.show();
         initWidgets();
@@ -230,11 +267,15 @@ public class LearningActivity extends Fragment implements CalendarAdapter.OnItem
         initMonthWidgets();
     */
     public void openMonthSelection(View view) {
-        dialog.dismiss();
         monthDialog = new Dialog(view.getContext());
         monthDialog.setCancelable(true);
         monthDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         monthDialog.setContentView(R.layout.calendar_month);
+        TextView year = monthDialog.findViewById(R.id.monthYearTV);
+
+
+        year.setText(String.valueOf(selectedDate.getYear()));
+
         Window window = monthDialog.getWindow();
         if (window != null) {
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT); // Set the width to match_parent and height to wrap_content
@@ -242,15 +283,72 @@ public class LearningActivity extends Fragment implements CalendarAdapter.OnItem
         monthDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         monthDialog.show();
         ImageView close = monthDialog.findViewById(R.id.close_calendar);
+        TextView yearSelect = monthDialog.findViewById(R.id.monthYearTV);
+
+
+        yearSelect.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openYearSelection(view);
+                monthDialog.dismiss();
+            }
+        });
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 monthDialog.dismiss();
             }
         });
+
+
+
+
         initWidget();
     }
 
+    public void openYearSelection(View view){
+        yearDialog = new Dialog(view.getContext());
+        yearDialog.setCancelable(true);
+        yearDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        yearDialog.setContentView(R.layout.year_test);
+        Window window = yearDialog .getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT); // Set the width to match_parent and height to wrap_content
+        }
+        yearDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        yearItems = new ArrayList<YearItem>();
+        RecyclerView recyclerViewYear = yearDialog.findViewById(R.id.recyclerViewYear);
+        YearAdapter adapter = new YearAdapter( this, yearItems, view);
+
+        yearItems.add(new YearItem("2018", "5"));
+        yearItems.add(new YearItem("2018", "5"));
+        yearItems.add(new YearItem("2018", "5"));
+
+        ImageView close = yearDialog.findViewById(R.id.close_calendar);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                yearDialog.dismiss();
+            }
+        });
+
+        recyclerViewYear.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerViewYear.setAdapter(adapter);
+        yearDialog.show();
+    }
+    @Override
+    public void onYearClick(int position) {
+        String setYear = yearItems.get(position).getYear();
+        selectedDate = selectedDate.withYear(Integer.parseInt(setYear));
+        TextView monthText = monthDialog.findViewById(R.id.monthYearTV);
+        Toast.makeText(view.getContext(), String.valueOf(position) + " " + String.valueOf(yearItems.get(position).getYear()), Toast.LENGTH_SHORT).show();
+
+        monthText.setText(setYear);
+        setMonthView();
+        openMonthSelection(view);
+        yearDialog.dismiss();
+    }
     void initWidget(){
         ViewGroup monthGrid = monthDialog.findViewById(R.id.monthLayout);
         int monthGridLength = monthGrid.getChildCount();

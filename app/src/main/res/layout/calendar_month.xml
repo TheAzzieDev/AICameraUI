@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="2024"
+                android:text="18-24"
                 android:textAlignment="center"
                 android:textColor="@color/danger"
                 android:textSize="25dp" />
